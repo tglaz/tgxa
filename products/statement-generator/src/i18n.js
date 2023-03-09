@@ -16,19 +16,7 @@ i18n
       cache: ['cookie'],
     },
     backend: {
-      loadPath: () => {
-        // check the domain to account for path
-        const { host, pathname } = window.location;
-        let pathPrefix = '';
-
-        if (host.includes('github.io')) {
-          pathPrefix = pathname;
-        }
-
-        const loadPath = `${pathPrefix}/locales/{{lng}}/{{ns}}.json`;
-
-        return loadPath.replace('//', '/');
-      },
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
   });
 
