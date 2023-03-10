@@ -26,17 +26,11 @@ jobs:
 
       - name: Setup Environment Variables
         run: |
-          echo "My ENV VARs!"
-          echo "REACT_APP_CONTENTFUL_ENV with no vars prefixs: $REACT_APP_CONTENTFUL_ENV "
-          echo "REACT_APP_CONTENTFUL_ENV: ${{ vars.REACT_APP_CONTENTFUL_ENV }}"
-          echo "REACT_APP_CONTENTFUL_ENTRY_ID_FAQ: ${{ vars.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ }}"
           touch ./products/statement-generator/.env
-          echo "REACT_APP_HELLO=HELLO" >> ./products/statement-generator/.env
-          echo "REACT_APP_HELL_HELLO=HELLO-HELLO" > ./products/statement-generator/.env
-          echo "REACT_APP_CONTENTFUL_ENV=${{ vars.REACT_APP_CONTENTFUL_ENV }}" > ./products/statement-generator/.env
-          echo "REACT_APP_CONTENTFUL_FAQ_SPACE_ID=${{ vars.REACT_APP_CONTENTFUL_FAQ_SPACE_ID }}" > ./products/statement-generator/.env
-          echo "REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN=${{ vars.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN }}" > ./products/statement-generator/.env
-          echo "REACT_APP_CONTENTFUL_ENTRY_ID_FAQ=${{ vars.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ }}" > ./products/statement-generator/.env
+          echo "REACT_APP_CONTENTFUL_ENV=${{ vars.REACT_APP_CONTENTFUL_ENV }}" >> ./products/statement-generator/.env
+          echo "REACT_APP_CONTENTFUL_FAQ_SPACE_ID=${{ vars.REACT_APP_CONTENTFUL_FAQ_SPACE_ID }}" >> ./products/statement-generator/.env
+          echo "REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN=${{ vars.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN }}" >> ./products/statement-generator/.env
+          echo "REACT_APP_CONTENTFUL_ENTRY_ID_FAQ=${{ vars.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ }}" >> ./products/statement-generator/.env
 
       - name: Build client files
         run: |
