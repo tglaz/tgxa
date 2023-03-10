@@ -6,7 +6,6 @@ import { INLINES } from '@contentful/rich-text-types';
 import LinkAsText from 'components/LinkAsText';
 import ContentContainer from 'components-layout/ContentContainer';
 
-const APP_HELLO_SECRET = process.env.REACT_APP_HELLO_SECRET;
 const CONTENTFUL_ENTRY_ID_FAQ = process.env.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ;
 const CONTENTFUL_ENV = process.env.REACT_APP_CONTENTFUL_ENV;
 const CONTENTFUL_FAQ_SPACE_ID = process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID;
@@ -17,24 +16,6 @@ function FAQ() {
   let cmsClient: ContentfulClientApi;
 
   const [faqContent, setFaqContent]: [any, Dispatch<any>] = useState<any>(null);
-
-  // eslint-disable-next-line  no-console
-  console.log('');
-  // eslint-disable-next-line  no-console
-  console.log('CONTENTFUL_ENV: ', CONTENTFUL_ENV);
-  // eslint-disable-next-line  no-console
-  console.log('CONTENTFUL_FAQ_SPACE_ID: ', CONTENTFUL_FAQ_SPACE_ID);
-  // eslint-disable-next-line  no-console
-  console.log(
-    'CONTENTFUL_DELIVERY_API_ACCESS_TOKEN: ',
-    CONTENTFUL_DELIVERY_API_ACCESS_TOKEN
-  );
-  // eslint-disable-next-line  no-console
-  console.log('CONTENTFUL_ENTRY_ID_FAQ: ', CONTENTFUL_ENTRY_ID_FAQ);
-  // eslint-disable-next-line  no-console
-  console.log('REACT_APP_HELLO_SECRET: ', APP_HELLO_SECRET);
-  // eslint-disable-next-line  no-console
-  console.log('');
 
   try {
     cmsClient = createClient({
