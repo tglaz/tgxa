@@ -7,6 +7,9 @@ import LinkAsText from 'components/LinkAsText';
 import ContentContainer from 'components-layout/ContentContainer';
 
 const CONTENTFUL_ENTRY_ID_FAQ = process.env.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ;
+const CONTENTFUL_ENV = process.env.REACT_APP_CONTENTFUL_ENV;
+const CONTENTFUL_FAQ_SPACE_ID = process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID;
+const CONTENTFUL_DELIVERY_API_ACCESS_TOKEN = process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN;
 
 function FAQ() {
   let cmsClient: ContentfulClientApi;
@@ -15,38 +18,18 @@ function FAQ() {
 
   // eslint-disable-next-line  no-console
   console.log('');
-  // eslint-disable-next-line  no-console
-  console.log('REACT_APP_HELLO: ', process.env.REACT_APP_HELLO);
-  // eslint-disable-next-line  no-console
-  console.log('');
-  // eslint-disable-next-line  no-console
-  console.log('REACT_APP_HELL_HELLO: ', process.env.REACT_APP_HELL_HELLO);
-  // eslint-disable-next-line  no-console
-  console.log('');
-  // eslint-disable-next-line  no-console
+  console.log('CONTENTFUL_ENV: ', CONTENTFUL_ENV);
+  console.log('CONTENTFUL_FAQ_SPACE_ID: ', CONTENTFUL_FAQ_SPACE_ID);
+  console.log('CONTENTFUL_DELIVERY_API_ACCESS_TOKEN: ', CONTENTFUL_DELIVERY_API_ACCESS_TOKEN);
   console.log('CONTENTFUL_ENTRY_ID_FAQ: ', CONTENTFUL_ENTRY_ID_FAQ);
   // eslint-disable-next-line  no-console
-  console.log(
-    'process.env.REACT_APP_CONTENTFUL_ENV: ',
-    process.env.REACT_APP_CONTENTFUL_ENV
-  );
-  // eslint-disable-next-line  no-console
-  console.log(
-    'process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID: ',
-    process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID
-  );
-  // eslint-disable-next-line  no-console
-  console.log(
-    'process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN: ',
-    process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN
-  );
+  console.log('');
 
   try {
     cmsClient = createClient({
-      environment: process.env.REACT_APP_CONTENTFUL_ENV,
-      space: process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID || '',
-      accessToken:
-        process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN || '',
+      environment: CONTENTFUL_ENV,
+      space: CONTENTFUL_FAQ_SPACE_ID || '',
+      accessToken: CONTENTFUL_DELIVERY_API_ACCESS_TOKEN || '',
     });
   } catch (error) {
     // eslint-disable-next-line  no-console
