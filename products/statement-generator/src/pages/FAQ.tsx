@@ -13,6 +13,17 @@ function FAQ() {
 
   const [faqContent, setFaqContent]: [any, Dispatch<any>] = useState<any>(null);
 
+  // eslint-disable-next-line  no-console
+  console.log('');
+  // eslint-disable-next-line  no-console
+  console.log('CONTENTFUL_ENTRY_ID_FAQ: ', CONTENTFUL_ENTRY_ID_FAQ);
+  // eslint-disable-next-line  no-console
+  console.log('process.env.REACT_APP_CONTENTFUL_ENV: ', process.env.REACT_APP_CONTENTFUL_ENV);
+  // eslint-disable-next-line  no-console
+  console.log('process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID: ', process.env.REACT_APP_CONTENTFUL_FAQ_SPACE_ID);
+  // eslint-disable-next-line  no-console
+  console.log('process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN: ', process.env.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN);
+
   try {
     cmsClient = createClient({
       environment: process.env.REACT_APP_CONTENTFUL_ENV,
