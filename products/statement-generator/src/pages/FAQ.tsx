@@ -16,6 +16,14 @@ function FAQ() {
   // eslint-disable-next-line  no-console
   console.log('');
   // eslint-disable-next-line  no-console
+  console.log('REACT_APP_HELLO: ', process.env.REACT_APP_HELLO);
+  // eslint-disable-next-line  no-console
+  console.log('');
+  // eslint-disable-next-line  no-console
+  console.log('REACT_APP_HELL_HELLO: ', process.env.REACT_APP_HELL_HELLO);
+  // eslint-disable-next-line  no-console
+  console.log('');
+  // eslint-disable-next-line  no-console
   console.log('CONTENTFUL_ENTRY_ID_FAQ: ', CONTENTFUL_ENTRY_ID_FAQ);
   // eslint-disable-next-line  no-console
   console.log(

@@ -22,10 +22,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Setup Environment Variables
         run: |
           touch ./products/statement-generator/.env
+          echo REACT_APP_HELLO="HELLO" >> ./products/statement-generator/.env
+          echo REACT_APP_HELL_HELLO="HELLO-HELLO" > ./products/statement-generator/.env
           echo REACT_APP_CONTENTFUL_ENV="${{ vars.REACT_APP_CONTENTFUL_ENV }}" > ./products/statement-generator/.env
           echo REACT_APP_CONTENTFUL_FAQ_SPACE_ID="${{ vars.REACT_APP_CONTENTFUL_FAQ_SPACE_ID }}" > ./products/statement-generator/.env
           echo REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN="${{ vars.REACT_APP_CONTENTFUL_DELIVERY_API_ACCESS_TOKEN }}" > ./products/statement-generator/.env
