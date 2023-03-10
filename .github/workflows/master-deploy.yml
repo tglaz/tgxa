@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: github-pages
     permissions: write-all
     strategy:
       matrix:
@@ -26,6 +27,7 @@ jobs:
       - name: Setup Environment Variables
         run: |
           echo "My ENV VARs:"
+          echo "REACT_APP_CONTENTFUL_ENV with no vars prefixs: $REACT_APP_CONTENTFUL_ENV "
           echo "REACT_APP_CONTENTFUL_ENV: ${{ vars.REACT_APP_CONTENTFUL_ENV }}"
           echo "REACT_APP_CONTENTFUL_ENTRY_ID_FAQ: ${{ vars.REACT_APP_CONTENTFUL_ENTRY_ID_FAQ }}"
           touch ./products/statement-generator/.env
