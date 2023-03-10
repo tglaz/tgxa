@@ -1,104 +1,53 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { Dispatch, useEffect, useState } from 'react';
+import { createClient } from 'contentful';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { INLINES } from '@contentful/rich-text-types';
 
 import LinkAsText from 'components/LinkAsText';
-
 import ContentContainer from 'components-layout/ContentContainer';
 
 function FAQ() {
-  const { t } = useTranslation();
+  const [faqContent, setFaqContent]: [any, Dispatch<any>] = useState<any>(null);
 
-  return (
-    <ContentContainer>
-      <h2>{t('faq_page.page_header')}</h2>
+  const cmsClient = createClient({
+    space: 'uxgl7ml6f9io',
+    environment: 'master',
+    accessToken: 'rgDHDUhtwLQ2yejB75a6nHnov6kAgz-fgBi4zVtlhj8',
+  });
 
-      <h3>{t('faq_page.title1')}</h3>
-      <p>{t('faq_page.paragraph1')}</p>
+  useEffect((): void => {
+    cmsClient
+      .getEntry('6vjxLzf5fFYUnJjOUBLuug')
+      .then((entry: any) => {
+        const renderOptions = {
+          renderNode: {
+            // Renders hyperlink elements to a LinkAsText components
+            // The LinkAsText implementation only renders the href/uri, which may
+            // not work as expected if contentful link includes other content.
+            [INLINES.HYPERLINK]: (node: any) => {
+              const {
+                data: { uri },
+              } = node;
 
-      <h3>{t('faq_page.title2')}</h3>
-      <p>{t('faq_page.paragraph2')}</p>
-      <p>{t('faq_page.paragraph2b')}</p>
-      <p>{t('faq_page.paragraph2c')}</p>
-      <p>{t('faq_page.paragraph2d')}</p>
-      <p>{t('faq_page.paragraph2e')}</p>
+              return <LinkAsText link={uri} />;
+            },
+          },
+        };
 
-      <h3>{t('faq_page.title3')}</h3>
-      <p>{t('faq_page.paragraph3')}</p>
-      <p>{t('faq_page.paragraph3b')}</p>
+        const nodes = documentToReactComponents(
+          entry.fields.faqContent,
+          renderOptions
+        );
 
-      <h3>{t('faq_page.title4')}</h3>
-      <p>{t('faq_page.paragraph4')}</p>
-      <p>{t('faq_page.paragraph4b')}</p>
-      <p>{t('faq_page.paragraph4c')}</p>
+        setFaqContent(nodes);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line  no-console
+        console.error(error);
+      });
+  }, []);
 
-      <h3>{t('faq_page.title5')}</h3>
-      <p>{t('faq_page.paragraph5')}</p>
-      <p>{t('faq_page.paragraph5b')}</p>
-
-      <h3>{t('faq_page.title6')}</h3>
-      <p>{t('faq_page.paragraph6')}</p>
-      <p>{t('faq_page.paragraph6b')}</p>
-      <ul>
-        <li>{t('faq_page.paragraph6b_li1')}</li>
-        <li>{t('faq_page.paragraph6b_li2')}</li>
-        <li>{t('faq_page.paragraph6b_li3')}</li>
-      </ul>
-      <p>{t('faq_page.paragraph6c')}</p>
-      <p>{t('faq_page.paragraph6d')}</p>
-      <ul>
-        <li>{t('faq_page.paragraph6d_li1')}</li>
-        <li>{t('faq_page.paragraph6d_li2')}</li>
-        <li>{t('faq_page.paragraph6d_li3')}</li>
-        <li>{t('faq_page.paragraph6d_li4')}</li>
-        <li>{t('faq_page.paragraph6d_li5')}</li>
-        <li>{t('faq_page.paragraph6d_li6')}</li>
-      </ul>
-      <p>
-        {t('faq_page.paragraph6e')}
-        <LinkAsText link="https://www.courts.ca.gov/documents/Prop47FAQs.pdf" />
-      </p>
-
-      <h3>{t('faq_page.title7')}</h3>
-      <p>{t('faq_page.paragraph7')}</p>
-      <p>{t('faq_page.paragraph7b')}</p>
-      <ul>
-        <li>{t('faq_page.paragraph7b_li1')}</li>
-        <li>{t('faq_page.paragraph7b_li2')}</li>
-        <li>{t('faq_page.paragraph7b_li3')}</li>
-        <li>{t('faq_page.paragraph7b_li4')}</li>
-      </ul>
-
-      <p>{t('faq_page.paragraph7c')}</p>
-      <p>{t('faq_page.paragraph7d')}</p>
-      <ul>
-        <li>{t('faq_page.paragraph7d_li1')}</li>
-        <li>{t('faq_page.paragraph7d_li2')}</li>
-        <li>{t('faq_page.paragraph7d_li3')}</li>
-        <li>{t('faq_page.paragraph7d_li4')}</li>
-      </ul>
-      <p>{t('faq_page.paragraph7e')}</p>
-      <p>{t('faq_page.paragraph7f')}</p>
-      <p>
-        {t('faq_page.paragraph7g')}
-        <LinkAsText link="https://drugpolicy.org/sites/default/files/Prop64-Resentencing-Guide-July2017.pdf" />
-      </p>
-
-      <h3>{t('faq_page.title8')}</h3>
-      <p>{t('faq_page.paragraph8')}</p>
-      <p>{t('faq_page.paragraph8b')}</p>
-
-      <h3>{t('faq_page.title9')}</h3>
-      <p>{t('faq_page.paragraph9')}</p>
-
-      <h3>{t('faq_page.title10')}</h3>
-      <p>{t('faq_page.paragraph10')}</p>
-      <p>{t('faq_page.paragraph10b')}</p>
-
-      <h3>{t('faq_page.title11')}</h3>
-      <p>{t('faq_page.paragraph11')}</p>
-      <p>{t('faq_page.paragraph11b')}</p>
-    </ContentContainer>
-  );
+  return <ContentContainer>{faqContent}</ContentContainer>;
 }
 
 export default FAQ;
